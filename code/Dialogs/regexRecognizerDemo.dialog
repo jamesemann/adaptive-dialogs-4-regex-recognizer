@@ -16,6 +16,12 @@
         "intent": "CancelIntent",
         "pattern": "(?i)cancel|never mind"
       }
+    ],
+    "entities": [
+      {
+        "$type": "Microsoft.DateTimeEntityRecognizer",
+        "$designer": {}
+      }
     ]
   },
   "triggers": [    
@@ -26,6 +32,10 @@
         {
           "$type": "Microsoft.SendActivity",
           "activity": "add intent recognized"
+        },
+        {
+          "$type": "Microsoft.SendActivity",
+          "activity": "entities recognized: @{string(turn.recognized.entities)}"
         }
       ]
     },
@@ -46,6 +56,9 @@
         {
           "$type": "Microsoft.SendActivity",
           "activity": "cancel intent recognized"
+        },
+        {
+          "$type": "Microsoft.SendActivity"
         }
       ]
     }

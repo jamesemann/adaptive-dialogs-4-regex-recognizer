@@ -1,0 +1,53 @@
+{
+  "$schema": "../app.schema",
+  "$kind": "Microsoft.AdaptiveDialog",
+  "recognizer": {
+    "$type": "Microsoft.RegexRecognizer",
+    "intents": [
+      {
+        "intent": "AddIntent",
+        "pattern": "(?i)(?:add|create) .*(?:to-do|todo|task)(?: )?(?:named (?<title>.*))?"
+      },
+      {
+        "intent": "HelpIntent",
+        "pattern": "(?i)help"
+      },
+      {
+        "intent": "CancelIntent",
+        "pattern": "(?i)cancel|never mind"
+      }
+    ]
+  },
+  "triggers": [    
+    {
+      "$type": "Microsoft.OnIntent",
+      "intent": "AddIntent",
+      "actions": [
+        {
+          "$type": "Microsoft.SendActivity",
+          "activity": "add intent recognized"
+        }
+      ]
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "intent": "HelpIntent",
+      "actions": [
+        {
+          "$type": "Microsoft.SendActivity",
+          "activity": "help intent recognized"
+        }
+      ]
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "intent": "CancelIntent",
+      "actions": [
+        {
+          "$type": "Microsoft.SendActivity",
+          "activity": "cancel intent recognized"
+        }
+      ]
+    }
+  ],
+}
